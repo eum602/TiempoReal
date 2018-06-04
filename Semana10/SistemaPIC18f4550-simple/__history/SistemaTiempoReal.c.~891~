@@ -1,0 +1,688 @@
+#include <18F4550.h>
+#device adc=8       //Resolucion 8BITS
+#use delay(clock=10000000)    //Oscilador de 10Mz
+///////////////////////////////////////
+#include<ds18b20.h> 
+//////////////////////////////////////
+#use rs232(baud=9600, xmit=PIN_C6,rcv=PIN_C7,bits=8,parity=N)  // Configuracion de la comunicacion serial
+#fuses HS,NOPROTECT,NOWDT,NOLVP,CPUDIV1,nomclr     // Configuracion de los Fuses
+
+#use FAST_IO(A) 
+#use FAST_IO(B)
+#use FAST_IO(D)
+
+#byte T0CON=0xFD5 // Direccion del Timer 0
+#byte wreg=0xFE8  // Direccion de la variable de trabajo W
+#byte TOSU=0xFFF
+#byte TOSH=0xFFE
+#byte TOSL=0xFFD
+
+// Declaracion de Variables
+char  rcvchar=0x00;
+char comando=0;
+int1  flagcmd=0;
+char buffer_recibido [10]="";
+
+int i=0;
+int1 listo=0;
+int valor2;
+int cola[10];
+int np=0;
+int k1,k2,k3,k4,k5,k6,k7,k8,l1,l2,l3,l4,l5,l6,l7,l8;
+int32 valor_final;
+int32 var0=0;
+int32 var1=0;
+int32 var2=0;
+int32 var3=0;
+int32 var4=0;
+int32 var5=0;
+// Lectura ADC
+unsigned int send;
+float temperature;
+
+int prioridad;
+int m,m1;
+
+// Declaración del PCB
+struct pcb{
+   int id;
+   int32 dir_inicio;
+   int32 dir_final;
+   int32 dir_actual;
+   int estado;
+   int estado_proceso;
+   int wreg;
+   int count;
+   int prioridad;
+}vector_proceso[10];
+
+// ======== VARIABLES DEL CALENDARIO ========== \\
+// estado_calendario = 0 -->   No ejecutar 
+// estado_calendario = 1 -->   Ejecutar 
+// estado_calendario = 2 -->   Vacio
+// estado_calendario = 3 -->   Cargando
+
+int vector_calendario[1000];
+int16 reloj = 0;
+int estado_calendario = 0;
+int prioridad_act = 0;
+int32 tam_cal=0;
+int temp_proceso;
+//=========================
+int16 mcm=0;
+//=============================
+
+void inte_Init()  // interrupcion de puerto serial
+{
+   enable_interrupts(GLOBAL);
+   enable_interrupts(INT_RDA);
+}
+
+void activar_timer(){
+   set_timer0(65048);   // 25ms
+   enable_interrupts(INT_TIMER0);
+  // output_toggle(Pin_D3);
+}
+
+void desactivar_timer(){
+disable_interrupts(INT_TIMER0);
+}
+void addbuff(char rcv) {//vector para [[numero de proceso]
+   if(rcvchar==35 || rcvchar==42){
+      if(rcvchar==42){
+         i=0;
+         listo=1;
+      }
+   }
+   else{
+      buffer_recibido[i]=rcvchar;
+      i=i+1;
+   }
+   //comando=buffer_recibido[0];
+   //valor2=buffer_recibido[1]-'0';
+   /////////////////////////////////////////////////////
+   if(listo){
+      var0=buffer_recibido[0]-'0';
+      var1=buffer_recibido[1]-'0';
+      var2=buffer_recibido[2]-'0';
+      var3=buffer_recibido[3]-'0';
+      var4=buffer_recibido[4]-'0';
+      var5=buffer_recibido[5]-'0';      
+      valor_final=(int32)(var5+(var4)*10+(var3)*100+(var2)*1000+(var1)*10000);     
+      printf("|  %Li  |*",valor_final); 
+ 
+   switch(var0){
+   case 0 :{
+   for(int jj=0;jj<10;jj++){
+   if(valor_final==vector_proceso[jj+1].dir_inicio){
+   vector_proceso[jj+1].count++;//valor impar es que va a cargar ,else descargar
+   valor2=vector_proceso[jj+1].id;
+   //valor de carga o descarga
+   if((vector_proceso[jj+1].count+0.0)/2>vector_proceso[jj+1].count/2){//caso impar->cargar
+   comando='C';
+   }
+   else{
+   comando='D';
+   }
+   //
+   jj=11;
+   }
+   }
+   break;
+   }
+   case 1 :{
+   //recibir tamaño de calendario
+   comando='M';//M indica iniciar y finalizar carga de calendario.
+   valor2=valor_final;
+   break;
+   }
+   
+   case 2 :{
+   //REcibir el calendario
+   comando='P';
+   valor_final=(int32)(var5+(var4)*10+(var3)*100+(var2)*1000);//posicion
+   valor2=valor_final;
+   temp_proceso=var1;//proceso
+   break;
+   }
+   case 3 :{
+   //ejecutar el calendario
+   comando='E';
+   break;
+   }
+   case 4 :{
+   //detener el calendario
+   comando='X';
+   break;
+   }
+   
+  }
+   
+   }
+   /////////////////////////////////////////////////////
+  
+}
+
+void Procesos_Init(){//ya no llamo al prceso 0
+  vector_proceso[0].id=0;
+   vector_proceso[0].dir_inicio=0x000;
+   vector_proceso[0].dir_actual=0x000;
+   vector_proceso[0].dir_final=0x000;
+   vector_proceso[0].estado=0;
+   vector_proceso[0].count=0;
+   vector_proceso[0].prioridad=0;   
+   
+   vector_proceso[1].id=1;
+   vector_proceso[1].dir_inicio=0x1000;
+   vector_proceso[1].dir_actual=0x1000;
+   vector_proceso[1].dir_final=0x1044;
+   vector_proceso[1].estado=0;
+   vector_proceso[1].count=0;
+   vector_proceso[1].prioridad=0;
+   
+   vector_proceso[2].id=2;
+   vector_proceso[2].dir_inicio=0x1046;
+   vector_proceso[2].dir_actual=0x1046;
+   vector_proceso[2].dir_final=0x1090;
+   vector_proceso[2].estado=0;
+   vector_proceso[2].count=0;
+   vector_proceso[2].prioridad=0;
+   
+   vector_proceso[3].id=3;
+   vector_proceso[3].dir_inicio=0x1092;
+   vector_proceso[3].dir_actual=0x1092;
+   vector_proceso[3].dir_final=0x10D6;
+   vector_proceso[3].estado=0;
+   vector_proceso[3].count=0;
+   vector_proceso[3].prioridad=0;
+   
+   vector_proceso[4].id=4;
+   vector_proceso[4].dir_inicio=0x10D8;
+   vector_proceso[4].dir_actual=0x10D8;
+   vector_proceso[4].dir_final=0x11D8;
+   vector_proceso[4].estado=0;
+   vector_proceso[4].count=0;
+   vector_proceso[4].prioridad=0;
+   
+   vector_proceso[5].id=5;
+   vector_proceso[5].dir_inicio=0x11DA;
+   vector_proceso[5].dir_actual=0x11DA;
+   vector_proceso[5].dir_final=0x12DA;
+   vector_proceso[5].estado=0;
+   vector_proceso[5].count=0;
+   vector_proceso[5].prioridad=0;
+   
+   vector_proceso[6].id=6;
+   vector_proceso[6].dir_inicio=0x12DC;
+   vector_proceso[6].dir_actual=0x12DC;
+   vector_proceso[6].dir_final=0x13DC;
+   vector_proceso[6].estado=0;
+   vector_proceso[6].count=0;
+   vector_proceso[6].prioridad=0;
+   
+   vector_proceso[7].id=7;
+   vector_proceso[7].dir_inicio=0x13DE;
+   vector_proceso[7].dir_actual=0x13DE;
+   vector_proceso[7].dir_final=0x14DE;
+   vector_proceso[7].estado=0;
+   vector_proceso[7].count=0;
+   vector_proceso[7].prioridad=0;
+   
+   vector_proceso[8].id=8;
+   vector_proceso[8].dir_inicio=0x14E0;
+   vector_proceso[8].dir_actual=0x14E0;
+   vector_proceso[8].dir_final=0x1605;
+   vector_proceso[8].estado=0;
+   vector_proceso[8].count=0;
+   vector_proceso[8].prioridad=0;
+   
+   vector_proceso[9].id=9;
+   vector_proceso[9].dir_inicio=0x2502;
+   vector_proceso[9].dir_actual=0x2502;
+   vector_proceso[9].dir_final=0x2850;
+   vector_proceso[9].estado=0;
+   vector_proceso[9].count=0;
+   vector_proceso[9].prioridad=0;
+   
+}
+
+   
+   
+   
+
+
+void procesa_cmd(void){             // procesa el ultimo comando guardado, un comando esta comprendido entre $ hasta * 
+   disable_interrupts(int_rda);
+   flagcmd=0;                       // Desactivo flag de comando pendiente.
+   addbuff(rcvchar);
+   enable_interrupts(int_rda);  
+  // delay_us(100);
+   printf("@");  
+  delay_us(100);
+   if (listo){
+     // delay_ms(20);
+      printf("*");
+   }
+}
+
+void Port_Init()
+{
+   set_tris_b(0x00);
+   set_tris_d(0x00);
+   set_tris_a(0x00);
+   output_b(0x00);
+   output_d(0x00);
+   output_a(0x00);
+}
+
+void Config_TMR0()
+{
+   T0CON=0b10000111;
+}
+
+
+void MCU_Init()
+{
+   printf("Conectado....*");
+   Port_Init();
+   Procesos_Init(); //inicializa las direcciones de cada proceso
+   inte_Init();//habilita int. global e interrupcion serial
+   Config_TMR0();
+}
+
+void cargar_proceso(int proceso,int prioridad){
+  
+  if(proceso>0){
+   cola[np]=proceso;
+   vector_proceso[proceso].estado=1;
+   vector_proceso[proceso].prioridad =prioridad;
+   np++;
+  }
+  
+}
+
+void descargar_proceso(int proceso){//fala implementar para cuando solo hay un proceso y se le kiera sacar
+   for(int i=0;i<np;i++){
+      if(cola[i]==proceso){
+         for(int j=i;j<np;j++){
+            cola[j]=cola[j+1];
+         }
+         vector_proceso[cola[i]].estado=0;
+         np--;
+         }
+   }
+}
+
+void limpiar_calendario (int mcm){
+   for (int i=0; i<mcm; i++){
+      vector_calendario[i] = 0;
+   }
+}
+
+
+//*****************************************************************************
+// INTERRUPCIONES
+// Interrupcion por comunicacion serial
+#INT_RDA
+void serial_isr()
+{
+   //printf("Recibido");     // se envia por Serial una palabra para verificar interrupcion
+   rcvchar = 0x00;
+   rcvchar = getc();    // se recibe el caracter enviado por la computadora
+   //output_toggle(Pin_D3);
+   if (rcvchar==35){
+      output_toggle(PIN_D6);
+   }
+  
+   flagcmd=1;
+    /////////////////////////////////////////////////////////////////////////////
+   if (rcvchar==88)//letra X 
+   {
+   estado_calendario=0;//se fuerza la parada de calendario para que no haya problema con 
+   //el envio y la recepcion de datos
+   reloj=0;
+   printf("X+0*");
+   flagcmd=0;
+   listo=0;
+   }
+   /////////////////////////////////////////////////////////////////////////////
+}
+// Interrupcion por Timer 0
+#INT_TIMER0
+void inter_quantum(){
+   int i=0;
+   disable_interrupts(INT_TIMER0);    
+   vector_proceso[cola[0]].wreg=wreg;
+   vector_proceso[cola[0]].dir_actual=(int32)TOSL;
+   vector_proceso[cola[0]].dir_actual=vector_proceso[cola[0]].dir_actual|((int32)TOSH<<8);
+   vector_proceso[cola[0]].dir_actual=vector_proceso[cola[0]].dir_actual|((int32)TOSU<<16);
+
+   // corriendo proceso
+   if(np>1)
+   {   
+      prioridad_act = 0;
+      for (i=1; i<np; i++ ){
+         if (vector_proceso[cola[i]].prioridad > prioridad_act){
+            m1 = i;
+            prioridad_act = vector_proceso[cola[i]].prioridad;
+         }
+         else{
+         m1=1;
+         }
+      }
+      
+      m=cola[0];
+      cola[0] = cola[m1];
+      for(i=m1;i<np-1;i++)
+      {
+         cola[i]=cola[i+1];
+      }
+      cola[np-1]=m;
+   }
+   
+    if(estado_calendario == 1){
+      reloj++;
+      //printf("reloj en el calendario: %Lu*",reloj);13
+      if(reloj >= tam_cal){//hace que el calendario sea ciclico
+         reloj = 0;
+         //printf("reloj tam_cal : %Lu %Lu*",reloj,tam_cal);//1
+         
+      }
+   }
+   
+   //printf("np: %i*",np);
+   // Direccionando al Sistema Operativo SO
+   TOSU=00;
+   TOSH=40;
+   TOSL=00;
+}
+
+//*****************************************************************************
+// LISTA DE PROGRAMAS
+// PROGRAMA 1
+#org 0x1000,0x1044
+void prender_D1(){
+   while(TRUE){
+      output_toggle(Pin_D1);
+      for (k1=0;k1<150;k1++){ for(l1=0;l1<200;l1++){}}
+   }
+}
+
+// PROGRAMA 2
+#org 0x1046,0x1090
+void prender_D2(){
+   while(TRUE){
+      output_toggle(Pin_D2);
+      for (k2=0;k2<50;k2++){ for(l2=0;l2<200;l2++){}}
+   }
+}
+
+// PROGRAMA 3
+#org 0x1092,0x10D6
+void prender_D3(){
+   while(TRUE){
+      output_toggle(Pin_D3);
+      for (k3=0;k3<150;k3++){ for(l3=0;l3<200;l3++){}}
+   }
+}
+
+// PROGRAMA 4: FINITO
+#org 0x10D8,0x11D8
+void prender_D4(){
+//parpadeo=0;
+   while(TRUE){
+      output_toggle(Pin_D4);
+      for (k4=0;k4<150;k4++){ for(l4=0;l4<250;l4++){}}
+      printf("Listo4*");   
+    comando='D';
+    valor2=4;//descarga este proceso(4)
+    vector_proceso[valor2].count++;//valor impar es que va a cargar ,else descargar
+    //printf("Numero de parpadeos es: %i*",parpadeo);
+    listo=1;
+    while(TRUE){}
+      
+   }
+   
+}
+
+//Programa 5  FINITO
+#org 0x11DA,0x12DA
+void prender_D5(){
+  //parpadeo=0;
+   while(TRUE){   
+    //desactivar_timer();
+      int dato_enviar[10]="";
+   for (int i=0;i<10;i++)
+   {    
+      dato_enviar[i]=i;      
+      //printf("%i*",dato_enviar[i]);      
+      for (k5=0;k5<100;k5++){ for(l5=0;l5<250;l5++){}}    
+      output_toggle(Pin_D5);
+   }
+   printf("Listo5*");   
+    comando='D';
+    valor2=5;
+    vector_proceso[valor2].count++;//valor impar es que va a cargar ,else descargar
+    //printf("Numero de parpadeos es: %i*",parpadeo);
+    listo=1;
+    while(TRUE){}
+      
+   }
+   
+   
+   
+}
+
+// PROGRAMA 6: FINITO
+#org 0x12DC,0x13DC
+void prender_D0(){
+//parpadeo=0;
+   while(TRUE){
+      output_toggle(Pin_D0);
+      for (k6=0;k6<150;k6++){ for(l6=0;l6<250;l6++){}}
+      printf("Listo6*");   
+    comando='D';
+    valor2=6;//descarga este proceso(6)
+    vector_proceso[valor2].count++;//valor impar es que va a cargar ,else descargar
+    //printf("Numero de parpadeos es: %i*",parpadeo);
+    listo=1;
+    while(TRUE){}
+      
+   }
+   
+}
+
+//PROGRAMA 7: Lectura ADC0 - FINITO
+#ORG 0x13DE, 0x14DE
+void leer_ADC0()
+{   
+   setup_adc_ports(AN0_TO_AN3|vss_vdd);
+   setup_adc(adc_clock_internal);
+   while(TRUE)
+   {
+      output_toggle(PIN_B0);
+      for (k7=1;k7<250;k7++){for (l7=1;l7<250;++l7){}}
+      set_adc_channel(0);
+      delay_us(50);
+      //value=Read_ADC();
+      send=Read_ADC();
+      //value1 = 500;
+      //value= (value*100)/1023;
+      //send = value;
+      printf("A+0+%u*",send);      
+      delay_us(150);
+      printf("listo7*");
+      comando = 'D';
+      valor2 = 7;
+      vector_proceso[valor2].count++;//valor impar es que va a cargar ,else descargar
+   // printf("Numero de parpadeos es: %i*",parpadeo);
+      listo=1;
+      while(TRUE){}//se debe evaluar si este while va, ya que podria hacer lento el muestreo
+      //por ende no se podria controlar adecuadamente.
+      
+   }
+}
+   
+
+// PROGRAMA 8: FINITO
+#org 0x14E0,0x1605
+void LecturaDigital(){
+//parpadeo=0;
+   while(TRUE){
+      output_toggle(Pin_D2);
+      for (k8=0;k8<150;k8++){ for(l8=0;l8<250;l8++){}}
+      temperature = ds18b20Read(); 
+      printf("Temp: %3.2lf grados\n\r",temperature);
+      printf("Listo8*");   
+    comando='D';
+    valor2=8;//descarga este proceso(8)
+    vector_proceso[valor2].count++;//valor impar es que va a cargar ,else descargar
+   // printf("Numero de parpadeos es: %i*",parpadeo);
+    listo=1;
+    while(TRUE){}
+      
+   }
+   
+}
+//PROGRAMA 9 cARGAR PROCESO DE ADMINISTRADOR DE TAREAS
+#ORG 0x2502, 0x2850
+void task_manager(){
+   while(TRUE)
+   {
+     desactivar_timer();
+      int m;
+         int32 mproceso, mdirini, mdirfin, mdiract;         
+         printf("|   Proceso  |  Dir.Ini  |  Dir.Fin  |  Dir.Act  |*");
+         for(m=0;m<np;m++)
+         {  mproceso = cola[m];
+            mdirini = vector_proceso[mproceso].dir_inicio;
+            mdirfin = vector_proceso[mproceso].dir_final;
+            mdiract = vector_proceso[mproceso].dir_actual;
+            printf("|      %Lu     |   %Lu    |   %Lu    |   %Lu    |*",mproceso,mdirini,mdirfin,mdiract);
+                      
+         }
+         
+  // valor2=(char)3-'0';
+ // descargar_proceso(valor2);
+ // descargar_proceso(valor2);
+  printf("adminOK*");
+ activar_timer();
+  comando='D';
+  valor2=9;
+  vector_proceso[valor2].count++;//valor impar es que va a cargar ,else descargar
+  listo=1;
+ while(TRUE){}
+       
+   }
+ 
+
+  
+}
+// SISTEMA OPERATIVO
+#org 0x4000, 0x4FFE
+void SO(){
+   while(TRUE){                                                                                        
+      if(flagcmd==1){ 
+         procesa_cmd();
+      }
+      
+      if(listo){
+            listo=0;
+
+            switch(comando){
+               case 'C': {//C:cargar determinado proceso
+                  cargar_proceso(valor2,0);                 
+                  break;
+               }
+               case 'D':{//Descagar un proceso
+                  descargar_proceso(valor2);
+                 break;                 
+               }
+               case 'M': {// recibir calendario
+               if (estado_calendario!=3){
+               tam_cal=valor2;
+               estado_calendario=3;
+               limpiar_calendario(tam_cal);
+               printf("M+3*");
+               }
+               else{
+               estado_calendario=0;
+               printf("M+0*");
+               }
+               break;
+               }
+               case  'P':{
+               vector_calendario[valor2] = temp_proceso;
+               printf("P+%i*",temp_proceso);
+               //printf("%i",valor2);
+               break;
+               }
+               case 'E' : {
+               estado_calendario=1;
+               reloj=0;
+               printf("E+1*");
+               break;
+               }
+               
+                case 'X' : {
+               estado_calendario=0;
+               reloj=0;
+               printf("X+0*");
+               break;
+               }
+               
+
+            }
+         }
+         
+          if (estado_calendario == 1){
+         if (vector_calendario[reloj] != 0){
+            //printf("proceso a calendarizar: %i*",vector_calendario[reloj]);//4
+            //printf("yendo a cargar proceso: %i*",vector_calendario[reloj]);//5
+            cargar_proceso(vector_calendario[reloj] , 2);//se carga con prioridad 2            
+           // printf("reloj: %Lu*", reloj);//6
+            //printf("estado_calendario: %i*",estado_calendario);//7
+            //printf("vector_proceso[cola[0]]: :%i*", cola[0]);//8
+            //printf("vector_proceso[cola[np]]: %i*",cola[np-1]);//9
+         }   
+       }
+       
+         
+         
+      if(np>0){         
+         if(vector_proceso[cola[0]].estado==1){
+            activar_timer();
+            vector_proceso[cola[0]].estado=2;     
+            goto_address(vector_proceso[cola[0]].dir_inicio);
+         }
+         else {
+            wreg=vector_proceso[cola[0]].wreg;
+            activar_timer();
+         
+         goto_address(vector_proceso[cola[0]].dir_actual);
+         }
+      }
+      
+       ///////////////////////////////////////////////////////
+      else{
+      if(estado_calendario==1 && np==0){
+      activar_timer();
+      while(TRUE){};//Espero hasta que el timer se active para que continue con espacios vacios
+      //del calendario, osea espacios del calendario que no se usan
+      }
+      }
+     /////////////////////////////////////////////////////// 
+   }
+}
+
+//*****************************************************************************
+// FUNCION PRINCIPAL
+void main()
+{
+   MCU_Init();
+   #asm
+   call 0x4000
+   #endasm 
+}
+
+

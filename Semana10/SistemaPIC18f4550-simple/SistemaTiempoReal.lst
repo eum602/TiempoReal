@@ -1,0 +1,252 @@
+CCS PCH C Compiler, Version 5.008, 5967               28-jun-15 04:29
+
+               Filename:   C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana10\Semana10\SistemaPIC18f4550-simple\SistemaTiempoReal.lst
+
+               ROM used:   400 bytes (1%)
+                           Largest free fragment is 32368
+               RAM used:   6 (0%) at main() level
+                           15 (1%) worst case
+               Stack used: 1 locations
+               Stack size: 31
+
+*
+0000:  GOTO   010C
+.................... #include <18F4550.h> 
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+0004:  MOVFF  FEA,0E
+0008:  MOVFF  FE9,0D
+000C:  BTFSS  07.7
+000E:  BRA    0020
+0010:  BSF    0D.7
+0012:  BTFSS  0D.4
+0014:  INCF   0D,F
+0016:  COMF   06,F
+0018:  COMF   07,F
+001A:  INCF   06,F
+001C:  BTFSC  FD8.2
+001E:  INCF   07,F
+0020:  SWAPF  07,W
+0022:  IORLW  F0
+0024:  MOVWF  09
+0026:  ADDWF  09,F
+0028:  ADDLW  E2
+002A:  MOVWF  0A
+002C:  ADDLW  32
+002E:  MOVWF  0C
+0030:  MOVF   07,W
+0032:  ANDLW  0F
+0034:  ADDWF  0A,F
+0036:  ADDWF  0A,F
+0038:  ADDWF  0C,F
+003A:  ADDLW  E9
+003C:  MOVWF  0B
+003E:  ADDWF  0B,F
+0040:  ADDWF  0B,F
+0042:  SWAPF  06,W
+0044:  ANDLW  0F
+0046:  ADDWF  0B,F
+0048:  ADDWF  0C,F
+004A:  RLCF   0B,F
+004C:  RLCF   0C,F
+004E:  COMF   0C,F
+0050:  RLCF   0C,F
+0052:  MOVF   06,W
+0054:  ANDLW  0F
+0056:  ADDWF  0C,F
+0058:  RLCF   09,F
+005A:  MOVLW  07
+005C:  MOVWF  08
+005E:  MOVLW  0A
+0060:  DECF   0B,F
+0062:  ADDWF  0C,F
+0064:  BNC   0060
+0066:  DECF   0A,F
+0068:  ADDWF  0B,F
+006A:  BNC   0066
+006C:  DECF   09,F
+006E:  ADDWF  0A,F
+0070:  BNC   006C
+0072:  DECF   08,F
+0074:  ADDWF  09,F
+0076:  BNC   0072
+0078:  CLRF   FEA
+007A:  MOVLW  08
+007C:  MOVWF  FE9
+007E:  MOVLW  07
+0080:  ANDWF  0D,W
+0082:  BCF    0D.6
+0084:  DECF   FE9,F
+0086:  ANDWF  0D,W
+0088:  BNZ   0098
+008A:  BTFSC  0D.4
+008C:  INCF   FE9,F
+008E:  BTFSC  0D.4
+0090:  BRA    0098
+0092:  MOVLW  20
+0094:  MOVWF  00
+0096:  BRA    00D0
+0098:  ADDWF  FE9,F
+009A:  MOVLW  0C
+009C:  SUBWF  FE9,W
+009E:  BTFSC  FD8.2
+00A0:  BSF    0D.6
+00A2:  MOVF   FEF,W
+00A4:  MOVWF  00
+00A6:  BNZ   00B8
+00A8:  BTFSC  0D.6
+00AA:  BRA    00B8
+00AC:  BTFSC  0D.4
+00AE:  BRA    00D8
+00B0:  BTFSC  0D.3
+00B2:  BRA    00B8
+00B4:  MOVLW  20
+00B6:  BRA    00CE
+00B8:  BTFSS  0D.7
+00BA:  BRA    00C8
+00BC:  MOVLW  2D
+00BE:  MOVWF  00
+00C0:  MOVF   FED,W
+00C2:  BCF    0D.6
+00C4:  BCF    0D.7
+00C6:  BRA    00D0
+00C8:  BSF    0D.3
+00CA:  BCF    0D.4
+00CC:  MOVLW  30
+00CE:  ADDWF  00,F
+00D0:  MOVF   00,W
+00D2:  BTFSS  F9E.4
+00D4:  BRA    00D2
+00D6:  MOVWF  FAD
+00D8:  MOVF   FEE,W
+00DA:  BTFSS  0D.6
+00DC:  BRA    009A
+00DE:  GOTO   017E (RETURN)
+....................  
+.................... #list 
+....................  
+....................  
+.................... #device adc=10       //Resolucion 8BITS 
+.................... #use delay(clock=10000000)    //Oscilador de 10Mz 
+00E2:  CLRF   FEA
+00E4:  MOVLW  06
+00E6:  MOVWF  FE9
+00E8:  MOVF   FEF,W
+00EA:  BZ    0108
+00EC:  MOVLW  03
+00EE:  MOVWF  01
+00F0:  CLRF   00
+00F2:  DECFSZ 00,F
+00F4:  BRA    00F2
+00F6:  DECFSZ 01,F
+00F8:  BRA    00F0
+00FA:  MOVLW  3C
+00FC:  MOVWF  00
+00FE:  DECFSZ 00,F
+0100:  BRA    00FE
+0102:  BRA    0104
+0104:  DECFSZ FEF,F
+0106:  BRA    00EC
+0108:  GOTO   018C (RETURN)
+.................... #use rs232(baud=9600, xmit=PIN_C6,rcv=PIN_C7,bits=8,parity=N)  // Configuracion de la comunicacion serial 
+.................... #fuses HS,NOPROTECT,NOWDT,NOLVP//,CPUDIV1,nomclr     // Configuracion de los Fuses 
+.................... //#fuses NODEBUG, BROWNOUT,NOCPD,NOWRT 
+.................... #use FAST_IO(A)  
+.................... #use FAST_IO(B) 
+.................... #use FAST_IO(D) 
+.................... // Lectura ADC 
+....................  int16 send;//,send1; 
+....................  
+.................... // FUNCION PRINCIPAL 
+.................... void main() 
+010C:  CLRF   FF8
+010E:  BCF    FD0.7
+0110:  BCF    FB8.3
+0112:  MOVLW  40
+0114:  MOVWF  FAF
+0116:  MOVLW  A6
+0118:  MOVWF  FAC
+011A:  MOVLW  90
+011C:  MOVWF  FAB
+011E:  MOVF   FC1,W
+0120:  ANDLW  C0
+0122:  IORLW  0F
+0124:  MOVWF  FC1
+0126:  MOVLW  07
+0128:  MOVWF  FB4
+.................... { //set_tris_a(0xFF); 
+....................   //output_a(0x00); 
+....................  //setup_port_A(all_analog); 
+....................    setup_adc_ports(AN0_TO_AN3|vss_vdd); 
+012A:  MOVF   FC1,W
+012C:  ANDLW  C0
+012E:  IORLW  0B
+0130:  MOVWF  FC1
+....................    setup_adc(adc_clock_internal); 
+0132:  MOVF   FC0,W
+0134:  ANDLW  C0
+0136:  IORLW  07
+0138:  MOVWF  FC0
+013A:  BSF    FC0.7
+013C:  BSF    FC2.0
+....................  while(TRUE){ 
+....................   
+....................  set_adc_channel(0); 
+013E:  MOVLW  00
+0140:  MOVWF  01
+0142:  MOVF   FC2,W
+0144:  ANDLW  C3
+0146:  IORWF  01,W
+0148:  MOVWF  FC2
+....................  delay_us(10); 
+014A:  MOVLW  07
+014C:  MOVWF  00
+014E:  DECFSZ 00,F
+0150:  BRA    014E
+0152:  BRA    0154
+0154:  NOP   
+....................  send=Read_ADC(); 
+0156:  BSF    FC2.1
+0158:  BTFSC  FC2.1
+015A:  BRA    0158
+015C:  MOVFF  FC3,04
+0160:  MOVFF  FC4,05
+....................  delay_us(100); 
+0164:  MOVLW  52
+0166:  MOVWF  00
+0168:  DECFSZ 00,F
+016A:  BRA    0168
+016C:  BRA    016E
+016E:  NOP   
+....................  printf("%4ld\r",send);  
+0170:  MOVLW  02
+0172:  MOVWF  FE9
+0174:  MOVFF  05,07
+0178:  MOVFF  04,06
+017C:  BRA    0004
+017E:  MOVLW  0D
+0180:  BTFSS  F9E.4
+0182:  BRA    0180
+0184:  MOVWF  FAD
+....................   //setup_adc_ports(AN0_TO_AN3|vss_vdd); 
+....................   delay_ms(100); 
+0186:  MOVLW  64
+0188:  MOVWF  06
+018A:  BRA    00E2
+018C:  BRA    013E
+....................   
+....................   
+....................  } 
+.................... } 
+....................  
+018E:  SLEEP 
+....................  
+
+Configuration Fuses:
+   Word  1: CC3F   PLL12 CPUDIV4 USBDIV HS FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV21 VREGEN NOWDT WDT32768
+   Word  3: 8700   CCP2C1 PBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

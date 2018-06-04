@@ -1,0 +1,18 @@
+void LecturaDigital(){
+//parpadeo=0;
+   while(TRUE){
+      output_toggle(Pin_D2);
+      for (k8=0;k8<150;k8++){ for(l8=0;l8<250;l8++){}}
+      temperature = ds18b20Read(); 
+      printf("Temp: %3.2lf grados\n\r",temperature);
+      printf("Listo8*");   
+    comando='D';
+    valor2=8;//descarga este proceso(8)
+    vector_proceso[valor2].count++;//valor impar es que va a cargar ,else descargar
+   // printf("Numero de parpadeos es: %i*",parpadeo);
+    listo=1;
+    while(TRUE){}
+      
+   }
+   
+}

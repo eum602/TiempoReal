@@ -1,0 +1,71 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-005 send
+006-007 @PRINTF_LD_9600_31766_31767.P1
+006     @delay_ms1.P2
+008     @PRINTF_LD_9600_31766_31767.@SCRATCH1
+009     @PRINTF_LD_9600_31766_31767.@SCRATCH2
+00A     @PRINTF_LD_9600_31766_31767.@SCRATCH3
+00B     @PRINTF_LD_9600_31766_31767.@SCRATCH4
+00C     @PRINTF_LD_9600_31766_31767.@SCRATCH5
+00D     @PRINTF_LD_9600_31766_31767.@SCRATCH6
+00E     @PRINTF_LD_9600_31766_31767.@SCRATCH7
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  @PRINTF_LD_9600_31766_31767
+0000E2  @delay_ms1
+00010C  main
+00010C  @cinit1
+00012A  @cinit2
+
+Project Directory:
+    C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana10\Semana10\SistemaPIC18f4550-simple\
+
+Project Files:
+    SistemaTiempoReal.c                                     [28-jun-15 04:29  CRC=8DFAF0F0]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h [03-jul-13 14:29  CRC=A157EDDE]
+
+Source signature=D0AACCAC
+
+Units:
+    SistemaTiempoReal (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   SistemaTiempoReal.xsym
+    Errors:      SistemaTiempoReal.err
+    Ext Symbols: SistemaTiempoReal.esym
+    INHX32:      SistemaTiempoReal.hex
+    Symbols:     SistemaTiempoReal.sym
+    List:        SistemaTiempoReal.lst
+    Debug/COFF:  SistemaTiempoReal.cof
+    Project:     SistemaTiempoReal.ccspjt
+    Call Tree:   SistemaTiempoReal.tre
+    Statistics:  SistemaTiempoReal.STA

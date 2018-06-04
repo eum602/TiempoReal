@@ -1,0 +1,5 @@
+ÀÄSistemaTiempoReal
+   ÀÄmain  0/132  Ram=0
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄ@PRINTF_LD_9600_31766_31767  0/222  Ram=9
+      ÀÄ@delay_ms1  0/42  Ram=1

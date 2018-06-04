@@ -1,0 +1,23 @@
+[PROJECT]
+Target=SistemaTiempoReal.hex
+Processor_Text=PIC18F4550
+CCSVerions=5.008
+Compiler=PCH
+CCSVersion=5.008
+[Target Data]
+FileList=SistemaTiempoReal.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\DriversC:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Program Files (x86)\PICC\Drivers\C:\Program Files (x86)\PICC\Devices\;C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana10\Semana10\SistemaPIC18f4550-sem10\;C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana10\Semana10\SistemaPIC18f4550-sem10\C:\Program Files (x86)\PICC\Devices\
+[D:\IGNACIO\ProgramacionGitHub\Sistemas-Tiempo-Real\PIC\SistemaPIC18f4550\SistemaTiempoReal]
+Type=4
+[mru-list]
+1=SistemaTiempoReal.c
+[Opened Files]
+1=SistemaTiempoReal.c
+2=
+3=
+[SistemaTiempoReal.c]
+Type=4
+[Units]
+Count=1
+1=SistemaTiempoReal (main)
