@@ -1,0 +1,115 @@
+
+ROM used:   9254/16384 (28%)
+            11044/16384 (34%) including unused fragments
+
+            5.8 Average locations per line
+            20.5 Average locations per statement
+
+RAM used:   1308/2048 (64%) at main() level
+            1364/2048 (67%) worst case
+
+Stack used: 7 worst case (2 in main + 5 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  779   451 100  SistemaTiempoReal.c
+  821     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h
+----- -----
+ 1600   451 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     10   0    0    32  1.0  inte_Init
+0     12   0    0    32  1.0  activar_timer
+0      6   0    0    17  0.8  desactivar_timer
+0   1516   8    7  2706 11.4  addbuff
+0     92   0   14             @MUL3232
+0     12   0    0             @const714
+0     42   0    3             @PSTRINGCN_9600_31766_31767
+0    148   1   13             @DIV3232
+0    270   1   12             @PRINTF_L32D_9600_31766_31767
+0     54   0    2             @ITOF
+0    634   3   16             @ADDFF
+0    350   2   14             @DIVFF
+0    124   1   10             @FLT
+0    446   2    0  4591  3.0  Procesos_Init
+0     50   0    0   160  2.1  procesa_cmd
+0     14   0    0    67  1.2  Port_Init
+0      8   0    0    18  1.0  Config_TMR0
+0     38   0    0    62  1.1  MCU_Init
+0     16   0    0             @const741
+0     34   0    2             @PSTRINGC_9600_31766_31767
+0    106   1    4   185  4.7  cargar_proceso
+0    152   1    4   338  6.5  descargar_proceso
+0     36   0    3   104  3.7  limpiar_calendario
+0    480   3   16   813  4.6  pwem
+0     56   0    0   253  2.6  serial_isr
+0      6   0    0             @const759
+0    678   4   12  1449  9.0  inter_quantum
+0     30   0    0   163  3.5  prender_D1
+0     30   0    0   163  3.5  prender_D2
+0     30   0    0   163  3.5  prender_D3
+0    160   1    3   471  6.0  prender_D4
+0      8   0    0    17  0.8  @const767
+0    152   1    3   609  5.9  prender_D5
+0      8   0    0    17  0.8  @const772
+0    120   1    3   428  5.5  prender_D0
+0      8   0    0    17  0.8  @const775
+0    518   3    4  1009  8.5  leer_ADC0
+0    246   1   11             @MULFF
+0     68   0    5             @FTOSD
+0     26   0    0    17  0.8  @const782
+0    120   1    3   428  5.5  LECTURA_ADC
+0      8   0    0    17  0.8  @const785
+0    584   3    2   660  5.2  task_manager
+0     52   0    0             @const792
+0     52   0    0             @const793
+0    188   1   12             @PRINTF_L32U_9600_31766_31767
+0     10   0    0    17  0.8  @const796
+0    722   4    4  1871  8.7  SO
+0      6   0    0             @const798
+0      6   0    0             @const799
+0     44   0    3             @DIV88
+0    196   1    6             @PRINTF_D_9600_31766_31767
+0      6   0    0             @const807
+0      6   0    0             @const808
+0     28   0    0             @const809
+0     20   0    0             @const810
+0     80   0    0    17  0.8  @goto11388
+0    174   1    0    17  0.8  MAIN
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               33
+    Statements              451
+    Comments                264
+    Volume (V)              27198
+    Difficulty (D)          120.8
+    Effort to implement (E) 3285161
+    Time to implement (T)   50 hours, 42 minutes
+    Est Delivered Bugs (B)  7
+    Cyclomatic Complexity   79
+    Maintainability (MI)    46
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00006     4  4  
+00008-000A0   154  0  
+000A2-00FFE  3934  0  
+01000-01044    30  40  
+01046-01090    30  46  
+01092-010D6    30  40  
+010D8-011D8   160  98  
+011DA-012DA   152  106  
+012DC-013DC   120  138  
+013DE-016BE   518  220  
+016C0-01804   120  206  
+01806-02500  2696  628  
+02502-02850   584  264  
+02852-03FFE     0  6062  
+04000-04FFE   722  3374  
+05000-07FFE     0  12288  
+
+
+

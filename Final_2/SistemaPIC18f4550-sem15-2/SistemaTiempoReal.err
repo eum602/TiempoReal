@@ -1,0 +1,7 @@
+>>> Warning 216 "SistemaTiempoReal.c" Line 773(1,2): Interrupts disabled during call to prevent re-entrancy:  (@PSTRINGC_9600_31766_31767)
+>>> Warning 202 "SistemaTiempoReal.c" Line 46(5,10): Variable never used:   send1
+>>> Warning 202 "SistemaTiempoReal.c" Line 47(14,22): Variable never used:   numduty1
+>>> Warning 202 "SistemaTiempoReal.c" Line 48(6,10): Variable never used:   pwmE
+      Memory usage:   ROM=28%      RAM=64% - 67%
+      0 Errors,  4 Warnings.
+Build Successful.
