@@ -1,0 +1,49 @@
+
+ROM used:   240/7936 (3%)
+            240/7936 (3%) including unused fragments
+
+            0.3 Average locations per line
+            16.0 Average locations per statement
+
+RAM used:   8/357 (2%) at main() level
+            16/357 (4%) worst case
+
+Stack used: 1 worst case (1 in main + 0 for interrupts)
+Stack size: 7
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   49    15 100  recepcionPicPot.c
+  661     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877a.h
+----- -----
+  710    15 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     21   9    1             @delay_ms1
+0     95  40    3   341  2.7  main
+0    120  50    9             @PRINTF_LD_9600_62_63
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              15
+    Comments                129
+    Volume (V)              348
+    Difficulty (D)          2.5
+    Effort to implement (E) 866
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    49
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   236  1808  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01EFF     0  1792  
+
+
+

@@ -1,0 +1,69 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+021-022 main.q
+023-024 @PRINTF_LD_9600_62_63.P1
+023     main.@SCRATCH1
+024     @delay_ms1.P1
+025     @PRINTF_LD_9600_62_63.@SCRATCH1
+026     @PRINTF_LD_9600_62_63.@SCRATCH2
+027     @PRINTF_LD_9600_62_63.@SCRATCH3
+028     @PRINTF_LD_9600_62_63.@SCRATCH4
+029     @PRINTF_LD_9600_62_63.@SCRATCH5
+02A     @PRINTF_LD_9600_62_63.@SCRATCH6
+02B     @PRINTF_LD_9600_62_63.@SCRATCH7
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @PRINTF_LD_9600_62_63
+00007C  @delay_ms1
+000091  main
+000091  @cinit1
+0000A3  @cinit2
+
+Project Directory:
+    C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgPIC16F877A_Semana1\
+
+Project Files:
+    recepcionPicPot.c                                       [03-abr-15 17:53  CRC=C0874478]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877a.h [03-jul-13 14:28  CRC=4E65664C]
+
+Source signature=5D521110
+
+Units:
+    recepcionPicPot (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    ICD Provisions: Yes
+
+Output Files:
+    XREF file:   recepcionPicPot.xsym
+    Errors:      recepcionPicPot.err
+    Ext Symbols: recepcionPicPot.esym
+    INHX8:       recepcionPicPot.hex
+    Symbols:     recepcionPicPot.sym
+    List:        recepcionPicPot.lst
+    Debug/COFF:  recepcionPicPot.cof
+    Project:     recepcionPicPot.ccspjt
+    Call Tree:   recepcionPicPot.tre
+    Statistics:  recepcionPicPot.STA

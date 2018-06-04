@@ -1,0 +1,8 @@
+ÀÄrecepcionPicPot
+   ÀÄmain  0/95  Ram=3
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄ@PRINTF_LD_9600_62_63  0/120  Ram=9
+      ÃÄ@delay_ms1  0/21  Ram=1
+      ÃÄ@delay_ms1  0/21  Ram=1
+      ÃÄ@delay_ms1  0/21  Ram=1
+      ÀÄ@delay_ms1  0/21  Ram=1

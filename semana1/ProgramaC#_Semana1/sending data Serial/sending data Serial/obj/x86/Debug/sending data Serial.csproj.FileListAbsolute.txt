@@ -1,0 +1,47 @@
+C:\Users\Erick Arturo\AppData\Local\Temporary Projects\sending data Serial\bin\Debug\sending data Serial.exe
+C:\Users\Erick Arturo\AppData\Local\Temporary Projects\sending data Serial\bin\Debug\sending data Serial.pdb
+C:\Users\Erick Arturo\AppData\Local\Temporary Projects\sending data Serial\obj\x86\Debug\sending_data_Serial.Form1.resources
+C:\Users\Erick Arturo\AppData\Local\Temporary Projects\sending data Serial\obj\x86\Debug\sending_data_Serial.Properties.Resources.resources
+C:\Users\Erick Arturo\AppData\Local\Temporary Projects\sending data Serial\obj\x86\Debug\sending data Serial.csproj.GenerateResource.Cache
+C:\Users\Erick Arturo\AppData\Local\Temporary Projects\sending data Serial\obj\x86\Debug\sending data Serial.exe
+C:\Users\Erick Arturo\AppData\Local\Temporary Projects\sending data Serial\obj\x86\Debug\sending data Serial.pdb
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.exe
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.pdb
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento\sending data Serial\sending data Serial\bin\Debug\sending data Serial.exe
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento\sending data Serial\sending data Serial\bin\Debug\sending data Serial.pdb
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form1.resources
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Properties.Resources.resources
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.csproj.GenerateResource.Cache
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.csprojResolveAssemblyReference.cache
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.exe
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.pdb
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.csprojResolveAssemblyReference.cache
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form1.resources
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Properties.Resources.resources
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.csproj.GenerateResource.Cache
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\bin\Debug\sending data Serial.exe
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\bin\Debug\sending data Serial.pdb
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form2.resources
+C:\Universidad\2014-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form3.resources
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.exe
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.pdb
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\bin\Debug\sending data Serial.exe
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\bin\Debug\sending data Serial.pdb
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.csprojResolveAssemblyReference.cache
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form1.resources
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form2.resources
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form3.resources
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Properties.Resources.resources
+C:\Universidad\Erick-UNI\2015-I\tiempoReal\1er trabajoTiempoReal\tercerintento - copia\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.csproj.GenerateResource.Cache
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\semana1\presentacion1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.exe
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\semana1\presentacion1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.pdb
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.exe
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.pdb
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\bin\Debug\sending data Serial.exe
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\bin\Debug\sending data Serial.pdb
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.csprojResolveAssemblyReference.cache
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form1.resources
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form2.resources
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Form3.resources
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending_data_Serial.Properties.Resources.resources
+C:\Universidad\Erick-UNI\2015-I\TiempoReal\Laboratorios\presentacionSemana1\ProgramaC#_Semana1\sending data Serial\sending data Serial\obj\x86\Debug\sending data Serial.csproj.GenerateResource.Cache
